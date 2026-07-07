@@ -1,0 +1,113 @@
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/navbar.css";
+function Navbar({ darkMode, setDarkMode }) {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    alert("Logout Successful ✅");
+    navigate("/login");
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="logo">
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          🏥 Medicare
+        </Link>
+      </div>
+
+      <ul className="nav-links">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+
+        {/* Patient Only */}
+        {user?.role !== "admin" && (
+          <>
+            <li>
+              <Link to="/doctors">Doctors</Link>
+            </li>
+
+            {token && (
+              <>
+                <li>
+                  <Link to="/appointments">Appointments</Link>
+                </li>
+
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+              </>
+            )}
+          </>
+        )}
+
+        {/* Admin Only */}
+        {user?.role === "admin" && token && (
+          <li>
+            <Link to="/admin">Admin Dashboard</Link>
+          </li>
+        )}
+      </ul>
+
+      <div className="nav-buttons">
+        {!token ? (
+          <>
+            <Link to="/login">
+              <button className="login-btn">Login</button>
+            </Link>
+
+            <Link to="/register">
+              <button className="register-btn">Register</button>
+            </Link>
+          </>
+        ) : (
+          <>
+          <button
+  onClick={() => setDarkMode(!darkMode)}
+  style={{
+    marginRight: "15px",
+    background: darkMode ? "#ffc107" : "#222",
+    color: darkMode ? "black" : "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "20px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  }}
+>
+  {darkMode ? "☀ Light" : "🌙 Dark"}
+</button>
+            <span
+              style={{
+                color: "white",
+                marginRight: "15px",
+                fontWeight: "bold",
+              }}
+            >
+              👤 {user?.name}
+            </span>
+
+            <button
+              className="login-btn"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
