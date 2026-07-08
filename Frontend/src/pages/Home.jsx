@@ -5,8 +5,8 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="hero">
-        <div className="hero-left">
+      <section className="hero" data-aos="fade-up">
+        <div className="hero-left" data-aos="fade-right">
           <h1>Book Your Doctor Appointment Online</h1>
 
           <p>
@@ -25,63 +25,67 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero-right">
+        <div className="hero-right" data-aos="fade-left">
           <img
             src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600"
             alt="Doctor"
           />
         </div>
       </section>
-<section
-  style={{
-    display: "flex",
-    justifyContent: "space-around",
-    padding: "50px",
-    background: "#fff",
-    textAlign: "center",
-  }}
->
-  <div>
-    <h1 style={{ color: "#0d6efd" }}>50+</h1>
-    <p>Doctors</p>
-  </div>
 
-  <div>
-    <h1 style={{ color: "#0d6efd" }}>1000+</h1>
-    <p>Patients</p>
-  </div>
+      {/* Statistics */}
+      <section
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          padding: "50px",
+          background: "#fff",
+          textAlign: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        <div>
+          <h1 style={{ color: "#0d6efd" }}>50+</h1>
+          <p>Doctors</p>
+        </div>
 
-  <div>
-    <h1 style={{ color: "#0d6efd" }}>24/7</h1>
-    <p>Support</p>
-  </div>
+        <div>
+          <h1 style={{ color: "#0d6efd" }}>1000+</h1>
+          <p>Patients</p>
+        </div>
 
-  <div>
-    <h1 style={{ color: "#0d6efd" }}>99%</h1>
-    <p>Success Rate</p>
-  </div>
-</section>
+        <div>
+          <h1 style={{ color: "#0d6efd" }}>24/7</h1>
+          <p>Support</p>
+        </div>
+
+        <div>
+          <h1 style={{ color: "#0d6efd" }}>99%</h1>
+          <p>Success Rate</p>
+        </div>
+      </section>
+
       {/* Features */}
       <section className="features">
-        <h2>Why Choose Medicare?</h2>
+        <h2 data-aos="fade-up">Why Choose Medicare?</h2>
 
         <div className="feature-grid">
-          <div className="feature-card">
+          <div className="feature-card" data-aos="zoom-in">
             <h3>👨‍⚕️ Expert Doctors</h3>
             <p>Consult experienced specialists from different departments.</p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card" data-aos="zoom-in">
             <h3>📅 Easy Booking</h3>
             <p>Book appointments online in just a few clicks.</p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card" data-aos="zoom-in">
             <h3>🕒 24/7 Support</h3>
             <p>We're available anytime to assist your healthcare needs.</p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card" data-aos="zoom-in">
             <h3>💊 Trusted Service</h3>
             <p>Secure, reliable and patient-focused healthcare platform.</p>
           </div>

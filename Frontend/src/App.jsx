@@ -14,11 +14,15 @@ import DoctorDetails from "./pages/DoctorDetails";
 import AddDoctor from "./pages/AddDoctor";
 import EditDoctor from "./pages/EditDoctor";
 import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Payment from "./pages/Payment";
+import Contact from "./pages/Contact";
 function App() {
   const [darkMode, setDarkMode] = useState(
   localStorage.getItem("theme") === "dark"
 );
+
 
 useEffect(() => {
   if (darkMode) {
@@ -29,6 +33,12 @@ useEffect(() => {
     localStorage.setItem("theme", "light");
   }
 }, [darkMode]);
+useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
+}, []);
   return (
     <BrowserRouter>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} /> 
@@ -45,6 +55,7 @@ useEffect(() => {
         <Route path="/add-doctor" element={<AddDoctor />} />
         <Route path="/edit-doctor/:id" element={<EditDoctor />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </BrowserRouter>

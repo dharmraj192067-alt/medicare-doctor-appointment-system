@@ -46,6 +46,9 @@ function Navbar({ darkMode, setDarkMode }) {
                 <li>
                   <Link to="/profile">Profile</Link>
                 </li>
+                <li>
+  <Link to="/contact">Contact</Link>
+</li>
               </>
             )}
           </>
