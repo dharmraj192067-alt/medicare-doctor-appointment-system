@@ -1,13 +1,37 @@
 .card {
-  background: #0d6efd;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 25px;
+  border-radius: 18px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,.2);
-  transition: .3s;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.45);
+}
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card h1 {
+  font-size: 38px;
+  font-weight: bold;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark .card {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
 }

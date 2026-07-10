@@ -8,6 +8,8 @@ function Contact() {
     message: "",
   });
 
+  const isDark = document.body.classList.contains("dark");
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -37,6 +39,7 @@ function Contact() {
         gap: "40px",
         flexWrap: "wrap",
         padding: "20px",
+        color: isDark ? "white" : "black",
       }}
     >
       {/* Left */}
@@ -47,6 +50,7 @@ function Contact() {
           color: "white",
           padding: "35px",
           borderRadius: "15px",
+          
         }}
       >
         <h1>Contact Medicare</h1>
@@ -75,7 +79,7 @@ function Contact() {
       <div
         style={{
           flex: 1,
-          background: "#fff",
+          background: isDark ? "#1e293b" : "#fff",
           padding: "35px",
           borderRadius: "15px",
           boxShadow: "0 0 20px rgba(0,0,0,.1)",
@@ -109,6 +113,9 @@ function Contact() {
               width: "100%",
               padding: "12px",
               marginBottom: "15px",
+              background:isDark ? "#334155" : "white",
+              color: isDark ? "white" : "black",
+              border: isDark ? "1px solid #475569" : "1px solid #ccc",
             }}
           />
 

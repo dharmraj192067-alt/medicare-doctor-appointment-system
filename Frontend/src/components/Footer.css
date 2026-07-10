@@ -40,3 +40,27 @@
 }
 
 }
+/* new */
+/* ================= DARK MODE FOOTER ================= */
+
+body.dark .footer {
+  background: #020617;
+  color: white;
+}
+
+body.dark .footer-section h2,
+body.dark .footer-section h3 {
+  color: white;
+}
+
+body.dark .footer-section p {
+  color: #cbd5e1;
+}
+
+body.dark .footer hr {
+  border: 1px solid #334155;
+}
+
+body.dark .copyright {
+  color: #94a3b8;
+}

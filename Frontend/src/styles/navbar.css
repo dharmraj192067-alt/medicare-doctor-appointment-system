@@ -116,3 +116,41 @@
     margin: 5px;
   }
 }
+/* new */
+/* ================= DARK MODE NAVBAR ================= */
+
+body.dark .navbar {
+  background: linear-gradient(135deg, #020617, #111827);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .logo a {
+  color: #ffffff !important;
+}
+
+body.dark .nav-links a {
+  color: #f8fafc;
+}
+
+body.dark .nav-links a::after {
+  background: #60a5fa;
+}
+
+body.dark .nav-links a:hover {
+  color: #60a5fa;
+}
+
+body.dark .login-btn {
+  background: #2563eb;
+  color: white;
+}
+
+body.dark .register-btn {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+}
+
+body.dark .nav-buttons span {
+  color: white !important;
+}

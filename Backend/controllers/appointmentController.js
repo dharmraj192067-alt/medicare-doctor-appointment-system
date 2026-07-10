@@ -6,6 +6,21 @@ const bookAppointment = async (req, res) => {
     console.log("USER:", req.user);
     console.log("BODY:", req.body);
 
+    // Check if same user already has appointment on same date & time
+    const existingAppointment = await Appointment.findOne({
+      patient: req.user._id,
+      appointmentDate: req.body.appointmentDate,
+      time: req.body.time,
+    });
+
+    if (existingAppointment) {
+      return res.status(400).json({
+        status: "failed",
+        message:
+          "You already have an appointment at this date and time. Please choose another time.",
+      });
+    }
+
     const appointment = new Appointment({
       patient: req.user._id,
       doctor: req.body.doctor,
@@ -32,6 +47,7 @@ const bookAppointment = async (req, res) => {
     });
   }
 };
+
 // Get All Appointments
 const getAppointments = async (req, res) => {
   try {
@@ -53,6 +69,8 @@ const getAppointments = async (req, res) => {
     });
   }
 };
+
+// Update Appointment Status
 const updateAppointmentStatus = async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndUpdate(
@@ -85,6 +103,8 @@ const updateAppointmentStatus = async (req, res) => {
     });
   }
 };
+
+// Delete Appointment
 const deleteAppointment = async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.params.id);
@@ -107,12 +127,13 @@ const deleteAppointment = async (req, res) => {
     });
   }
 };
+
+// Get My Appointments
 const getMyAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find({
       patient: req.user._id,
-    })
-      .populate("doctor", "name specialization experience fees");
+    }).populate("doctor", "name specialization experience fees");
 
     res.status(200).json({
       status: "success",
@@ -126,10 +147,11 @@ const getMyAppointments = async (req, res) => {
     });
   }
 };
+
 module.exports = {
   bookAppointment,
-    getAppointments,
-     updateAppointmentStatus,
-      deleteAppointment,
-       getMyAppointments,
+  getAppointments,
+  updateAppointmentStatus,
+  deleteAppointment,
+  getMyAppointments,
 };

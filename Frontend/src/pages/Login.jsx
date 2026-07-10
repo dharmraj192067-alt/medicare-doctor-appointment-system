@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "../styles/login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -31,58 +32,36 @@ function Login() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "400px",
-        margin: "50px auto",
-        padding: "30px",
-        boxShadow: "0 0 10px rgba(0,0,0,.2)",
-        borderRadius: "10px",
-      }}
-    >
-      <h2>Login</h2>
+    <div className="login-container">
+      <div className="login-card">
 
-      <form onSubmit={loginUser}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px",
-          }}
-        />
+        <h2>🔐 Login</h2>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px",
-          }}
-        />
+        <form onSubmit={loginUser}>
 
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "#0d6efd",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Login
-        </button>
-      </form>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">
+            Login
+          </button>
+
+        </form>
+
+      </div>
     </div>
   );
 }

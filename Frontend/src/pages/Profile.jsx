@@ -4,14 +4,32 @@ import api from "../services/api";
 function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [isDark, setIsDark] = useState(() =>
+    document.body.classList.contains("dark")
+  );
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     getProfile();
+  }, []);
+
+  useEffect(() => {
+    const updateTheme = () => {
+      setIsDark(document.body.classList.contains("dark"));
+    };
+
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const getProfile = async () => {
@@ -80,18 +98,22 @@ function Profile() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#f4f8fc",
+        background: isDark ? "#0f172a" : "#f4f8fc",
         padding: "40px",
+        color: isDark ? "#f8fafc" : "#0f172a",
       }}
     >
       <div
         style={{
           maxWidth: "700px",
           margin: "auto",
-          background: "white",
+          background: isDark ? "#1e293b" : "white",
           borderRadius: "15px",
-          boxShadow: "0 8px 20px rgba(0,0,0,.15)",
+          boxShadow: isDark
+            ? "0 8px 20px rgba(0,0,0,.35)"
+            : "0 8px 20px rgba(0,0,0,.15)",
           overflow: "hidden",
+          color: isDark ? "#f8fafc" : "#0f172a",
         }}
       >
         {/* Header */}
@@ -123,22 +145,22 @@ function Profile() {
         <div style={{ padding: "30px" }}>
           <h2 style={{ color: "#0d6efd" }}>Edit Profile</h2>
 
-          <label>Name</label>
+          <label style={{ color: isDark ? "#e2e8f0" : "#0f172a" }}>Name</label>
 
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={inputStyle}
+            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
           />
 
-          <label>Email</label>
+          <label style={{ color: isDark ? "#e2e8f0" : "#0f172a" }}>Email</label>
 
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={inputStyle}
+            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
           />
 
           <button style={blueBtn} onClick={updateProfile}>
@@ -158,7 +180,7 @@ function Profile() {
             onChange={(e) =>
               setCurrentPassword(e.target.value)
             }
-            style={inputStyle}
+            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
           />
 
           <input
@@ -168,7 +190,7 @@ function Profile() {
             onChange={(e) =>
               setNewPassword(e.target.value)
             }
-            style={inputStyle}
+            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
           />
 
           <button

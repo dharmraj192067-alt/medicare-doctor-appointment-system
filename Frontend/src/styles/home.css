@@ -116,3 +116,53 @@
   color: #555;
   line-height: 1.7;
 }
+/* ========== DARK MODE ========== */
+
+body.dark {
+  background: #0f172a;
+  color: white;
+}
+
+body.dark .hero {
+  background: linear-gradient(135deg, #020617, #1e293b);
+}
+
+body.dark .hero-left p {
+  color: #d1d5db;
+}
+
+body.dark .primary-btn {
+  background: #2563eb;
+  color: white;
+}
+
+body.dark .secondary-btn {
+  border: 2px solid #60a5fa;
+  color: #60a5fa;
+}
+
+body.dark .features {
+  background: #0f172a;
+}
+
+body.dark .features h2 {
+  color: #60a5fa;
+}
+
+body.dark .feature-card {
+  background: #1e293b;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,.5);
+}
+
+body.dark .feature-card h3 {
+  color: #60a5fa;
+}
+
+body.dark .feature-card p {
+  color: #cbd5e1;
+}
+
+body.dark .feature-card:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,.6);
+}
