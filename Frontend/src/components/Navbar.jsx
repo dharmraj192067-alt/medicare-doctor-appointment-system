@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
-function Navbar({ darkMode, setDarkMode }) {
+function Navbar() {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -75,21 +75,6 @@ function Navbar({ darkMode, setDarkMode }) {
           </>
         ) : (
           <>
-          <button
-  onClick={() => setDarkMode(!darkMode)}
-  style={{
-    marginRight: "15px",
-    background: darkMode ? "#ffc107" : "#222",
-    color: darkMode ? "black" : "white",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "20px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  }}
->
-  {darkMode ? "☀ Light" : "🌙 Dark"}
-</button>
             <span
               style={{
                 color: "white",

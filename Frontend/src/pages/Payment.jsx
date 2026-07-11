@@ -89,7 +89,7 @@ ${txn}`
         style={{
           width: "100%",
           padding: "12px",
-          background: "#0d6efd",
+          background: "#1e40af",
           color: "white",
           border: "none",
           borderRadius: "8px",

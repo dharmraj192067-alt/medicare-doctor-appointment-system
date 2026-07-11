@@ -23,15 +23,3 @@
   font-size: 38px;
   font-weight: bold;
 }
-
-/* ================= DARK MODE ================= */
-
-body.dark .card {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-body.dark .card:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-}

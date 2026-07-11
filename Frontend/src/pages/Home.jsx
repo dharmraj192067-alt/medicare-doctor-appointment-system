@@ -39,28 +39,28 @@ function Home() {
           display: "flex",
           justifyContent: "space-around",
           padding: "50px",
-          background: "#fff",
+          background: "#f5f5f5",
           textAlign: "center",
           flexWrap: "wrap",
         }}
       >
         <div>
-          <h1 style={{ color: "#0d6efd" }}>50+</h1>
+          <h1 style={{ color: "#1e40af" }}>50+</h1>
           <p>Doctors</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#0d6efd" }}>1000+</h1>
+          <h1 style={{ color: "#1e40af" }}>1000+</h1>
           <p>Patients</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#0d6efd" }}>24/7</h1>
+          <h1 style={{ color: "#1e40af" }}>24/7</h1>
           <p>Support</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#0d6efd" }}>99%</h1>
+          <h1 style={{ color: "#1e40af" }}>99%</h1>
           <p>Success Rate</p>
         </div>
       </section>

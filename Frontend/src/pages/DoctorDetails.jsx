@@ -125,7 +125,7 @@ function DoctorDetails() {
             onClick={() => navigate(`/book/${doctor._id}`)}
             style={{
               padding: "12px 25px",
-              background: "#0d6efd",
+              background: "#1e40af",
               color: "white",
               border: "none",
               borderRadius: "8px",

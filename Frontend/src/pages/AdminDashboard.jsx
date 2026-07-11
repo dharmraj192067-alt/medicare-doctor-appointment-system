@@ -124,7 +124,7 @@ function AdminDashboard() {
             padding: "20px",
             marginBottom: "20px",
             boxShadow: "0 0 10px rgba(0,0,0,.1)",
-            background: "#fff",
+            background: "#f5f5f5",
           }}
         >
           <h3>{item.patient?.name}</h3>

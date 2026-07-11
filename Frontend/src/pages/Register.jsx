@@ -35,7 +35,7 @@ function Register() {
         maxWidth: "420px",
         margin: "60px auto",
         padding: "30px",
-        background: "#fff",
+        background: "#f5f5f5",
         borderRadius: "12px",
         boxShadow: "0 0 15px rgba(0,0,0,0.1)",
       }}
@@ -89,7 +89,7 @@ function Register() {
           style={{
             width: "100%",
             padding: "12px",
-            background: "#0d6efd",
+            background: "#1e40af",
             color: "#fff",
             border: "none",
             borderRadius: "8px",

@@ -107,7 +107,7 @@ function Profile() {
         style={{
           maxWidth: "700px",
           margin: "auto",
-          background: isDark ? "#1e293b" : "white",
+          background: isDark ? "#1e293b" : "#f5f5f5",
           borderRadius: "15px",
           boxShadow: isDark
             ? "0 8px 20px rgba(0,0,0,.35)"
@@ -119,7 +119,7 @@ function Profile() {
         {/* Header */}
         <div
           style={{
-            background: "linear-gradient(135deg,#0d6efd,#4facfe)",
+            background: "linear-gradient(135deg,#1e40af,#3b82f6)",
             color: "white",
             textAlign: "center",
             padding: "30px",
@@ -143,7 +143,7 @@ function Profile() {
 
         {/* Profile Info */}
         <div style={{ padding: "30px" }}>
-          <h2 style={{ color: "#0d6efd" }}>Edit Profile</h2>
+          <h2 style={{ color: "#1e40af" }}>Edit Profile</h2>
 
           <label style={{ color: isDark ? "#e2e8f0" : "#0f172a" }}>Name</label>
 
@@ -169,7 +169,7 @@ function Profile() {
 
           <hr style={{ margin: "35px 0" }} />
 
-          <h2 style={{ color: "#0d6efd" }}>
+          <h2 style={{ color: "#1e40af" }}>
             Change Password
           </h2>
 
@@ -217,7 +217,7 @@ const inputStyle = {
 const blueBtn = {
   width: "100%",
   padding: "12px",
-  background: "#0d6efd",
+  background: "#1e40af",
   color: "white",
   border: "none",
   borderRadius: "8px",
