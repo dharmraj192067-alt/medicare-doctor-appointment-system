@@ -4,7 +4,6 @@ import "../styles/home.css";
 function Home() {
   return (
     <>
-      {/* Hero */}
       <section className="hero" data-aos="fade-up">
         <div className="hero-left" data-aos="fade-right">
           <h1>Book Your Doctor Appointment Online</h1>
@@ -33,39 +32,28 @@ function Home() {
         </div>
       </section>
 
-      {/* Statistics */}
-      <section
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          padding: "50px",
-          background: "#f5f5f5",
-          textAlign: "center",
-          flexWrap: "wrap",
-        }}
-      >
+      <section className="stats-section">
         <div>
-          <h1 style={{ color: "#1e40af" }}>50+</h1>
+          <h1>50+</h1>
           <p>Doctors</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#1e40af" }}>1000+</h1>
+          <h1>1000+</h1>
           <p>Patients</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#1e40af" }}>24/7</h1>
+          <h1>24/7</h1>
           <p>Support</p>
         </div>
 
         <div>
-          <h1 style={{ color: "#1e40af" }}>99%</h1>
+          <h1>99%</h1>
           <p>Success Rate</p>
         </div>
       </section>
 
-      {/* Features */}
       <section className="features">
         <h2 data-aos="fade-up">Why Choose Medicare?</h2>
 

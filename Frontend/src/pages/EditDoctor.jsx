@@ -85,8 +85,8 @@ function EditDoctor() {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "40px auto" }}>
-      <h1>Edit Doctor</h1>
+    <div style={{ maxWidth: "520px", margin: "40px auto", padding: "30px", background: "var(--panel)", borderRadius: "16px", boxShadow: "0 12px 30px var(--shadow)", border: "1px solid var(--border)" }}>
+      <h1 style={{ marginBottom: "20px", color: "var(--accent)" }}>Edit Doctor</h1>
 
       <form onSubmit={updateDoctor}>
         <input
@@ -96,9 +96,8 @@ function EditDoctor() {
           onChange={handleChange}
           placeholder="Doctor Name"
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="text"
@@ -107,9 +106,8 @@ function EditDoctor() {
           onChange={handleChange}
           placeholder="Specialization"
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="number"
@@ -118,9 +116,8 @@ function EditDoctor() {
           onChange={handleChange}
           placeholder="Experience"
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="number"
@@ -129,20 +126,18 @@ function EditDoctor() {
           onChange={handleChange}
           placeholder="Fees"
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="file"
           name="image"
           accept="image/*"
           onChange={handleChange}
+          style={{ width: "100%", padding: "10px", marginBottom: "15px", color: "var(--muted)" }}
         />
 
-        <br /><br />
-
-        <button type="submit">Update Doctor</button>
+        <button type="submit" style={{ width: "100%", padding: "12px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>Update Doctor</button>
       </form>
     </div>
   );

@@ -31,8 +31,11 @@ ${txn}`
         maxWidth: "500px",
         margin: "40px auto",
         padding: "25px",
-        border: "1px solid #ddd",
+        border: "1px solid var(--border)",
         borderRadius: "10px",
+        background: "var(--panel)",
+        boxShadow: "0 0 20px var(--shadow)",
+        color: "var(--text)",
       }}
     >
       <h2>Payment</h2>
@@ -89,8 +92,8 @@ ${txn}`
         style={{
           width: "100%",
           padding: "12px",
-          background: "#1e40af",
-          color: "white",
+          background: "var(--primary)",
+          color: "var(--text)",
           border: "none",
           borderRadius: "8px",
           cursor: "pointer",

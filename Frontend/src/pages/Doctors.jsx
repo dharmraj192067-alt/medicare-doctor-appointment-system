@@ -25,14 +25,15 @@ function Doctors() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Our Doctors</h1>
+    <div style={{ padding: "40px", color: "var(--text)" }}>
+      <h1 style={{ color: "var(--accent)", marginBottom: "10px" }}>Our Doctors</h1>
 
       <div
         style={{
           display: "flex",
           gap: "10px",
           margin: "25px 0",
+          flexWrap: "wrap",
         }}
       >
         <input
@@ -43,10 +44,13 @@ function Doctors() {
           style={{
             width: "300px",
             padding: "10px",
+            background: "var(--panel)",
+            color: "var(--text)",
+            border: "1px solid var(--border)"
           }}
         />
 
-        <button onClick={getDoctors}>
+        <button onClick={getDoctors} style={{ padding: "10px 16px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>
           Search
         </button>
       </div>

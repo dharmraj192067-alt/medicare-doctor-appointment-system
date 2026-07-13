@@ -25,7 +25,7 @@ function MyAppointments() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: "40px", color: "var(--text)" }}>
       <h1 style={{ marginBottom: "30px" }}>My Appointments</h1>
 
       {appointments.length === 0 ? (
@@ -35,11 +35,12 @@ function MyAppointments() {
           <div
             key={item._id}
             style={{
-              border: "1px solid #ddd",
+              border: "1px solid var(--border)",
               borderRadius: "10px",
               padding: "20px",
               marginBottom: "20px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+              boxShadow: "0 2px 8px var(--shadow)",
+              background: "var(--panel)",
             }}
           >
             <h2>{item.doctor.name}</h2>

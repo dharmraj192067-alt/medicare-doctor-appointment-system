@@ -49,8 +49,8 @@ Transaction ID: TXN${Math.floor(Math.random() * 1000000)}`);
 };
 };
   return (
-    <div style={{ maxWidth: "500px", margin: "40px auto" }}>
-      <h1>Book Appointment</h1>
+    <div style={{ maxWidth: "520px", margin: "40px auto", padding: "30px", background: "var(--panel)", borderRadius: "16px", boxShadow: "0 12px 30px var(--shadow)", border: "1px solid var(--border)", color: "var(--text)" }}>
+      <h1 style={{ marginBottom: "20px", color: "var(--accent)" }}>Book Appointment</h1>
 
       <form onSubmit={handleSubmit}>
 
@@ -59,14 +59,14 @@ Transaction ID: TXN${Math.floor(Math.random() * 1000000)}`);
           value={date}
           onChange={(e) => setDate(e.target.value)}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <select
           value={time}
           onChange={(e) => setTime(e.target.value)}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         >
           <option value="">Select Time</option>
           <option>10:00 AM</option>
@@ -83,6 +83,7 @@ Transaction ID: TXN${Math.floor(Math.random() * 1000000)}`);
   value={reason}
   onChange={(e) => setReason(e.target.value)}
   rows="5"
+  style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
 />
 
 <br /><br />
@@ -132,7 +133,7 @@ Transaction ID: TXN${Math.floor(Math.random() * 1000000)}`);
 
 <br />
 
-<button type="submit">
+<button type="submit" style={{ width: "100%", padding: "12px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>
   Confirm Appointment
 </button>
 

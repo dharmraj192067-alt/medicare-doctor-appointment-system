@@ -65,7 +65,7 @@ function AdminDashboard() {
       : appointments.filter((item) => item.status === filter);
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: "40px", color: "var(--text)" }}>
 
       
      
@@ -119,12 +119,12 @@ function AdminDashboard() {
         <div
           key={item._id}
           style={{
-            border: "1px solid #ddd",
+            border: "1px solid var(--border)",
             borderRadius: "10px",
             padding: "20px",
             marginBottom: "20px",
-            boxShadow: "0 0 10px rgba(0,0,0,.1)",
-            background: "#f5f5f5",
+            boxShadow: "0 0 10px var(--shadow)",
+            background: "var(--panel)",
           }}
         >
           <h3>{item.patient?.name}</h3>

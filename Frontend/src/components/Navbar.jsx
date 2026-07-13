@@ -19,7 +19,7 @@ function Navbar() {
       <div className="logo">
         <Link
           to="/"
-          style={{ textDecoration: "none", color: "white" }}
+          style={{ textDecoration: "none", color: "var(--text)" }}
         >
           🏥 Medicare
         </Link>
@@ -77,7 +77,7 @@ function Navbar() {
           <>
             <span
               style={{
-                color: "white",
+                color: "var(--text)",
                 marginRight: "15px",
                 fontWeight: "bold",
               }}

@@ -59,8 +59,8 @@ const addDoctor = async (e) => {
   }
 };
   return (
-    <div style={{ maxWidth: "500px", margin: "40px auto" }}>
-      <h1>Add Doctor</h1>
+    <div style={{ maxWidth: "520px", margin: "40px auto", padding: "30px", background: "var(--panel)", borderRadius: "16px", boxShadow: "0 12px 30px var(--shadow)", border: "1px solid var(--border)" }}>
+      <h1 style={{ marginBottom: "20px", color: "var(--accent)" }}>Add Doctor</h1>
 
       <form onSubmit={addDoctor}>
         <input
@@ -70,9 +70,8 @@ const addDoctor = async (e) => {
           value={doctor.name}
           onChange={handleChange}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="text"
@@ -81,9 +80,8 @@ const addDoctor = async (e) => {
           value={doctor.specialization}
           onChange={handleChange}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="number"
@@ -92,9 +90,8 @@ const addDoctor = async (e) => {
           value={doctor.experience}
           onChange={handleChange}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="number"
@@ -103,20 +100,18 @@ const addDoctor = async (e) => {
           value={doctor.fees}
           onChange={handleChange}
           required
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
         />
-
-        <br /><br />
 
         <input
           type="file"
           name="image"
           accept="image/*"
           onChange={handleChange}
+          style={{ width: "100%", padding: "10px", marginBottom: "15px", color: "var(--muted)" }}
         />
 
-        <br /><br />
-
-        <button type="submit">
+        <button type="submit" style={{ width: "100%", padding: "12px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>
           Add Doctor
         </button>
       </form>

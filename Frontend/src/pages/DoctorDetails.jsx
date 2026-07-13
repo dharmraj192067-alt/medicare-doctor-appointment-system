@@ -81,7 +81,10 @@ function DoctorDetails() {
         margin: "40px auto",
         padding: "30px",
         borderRadius: "12px",
-        boxShadow: "0 0 10px rgba(0,0,0,.1)",
+        boxShadow: "0 0 10px var(--shadow)",
+        background: "var(--panel)",
+        border: "1px solid var(--border)",
+        color: "var(--text)",
       }}
     >
       <img
@@ -125,8 +128,8 @@ function DoctorDetails() {
             onClick={() => navigate(`/book/${doctor._id}`)}
             style={{
               padding: "12px 25px",
-              background: "#1e40af",
-              color: "white",
+              background: "var(--primary)",
+              color: "var(--text)",
               border: "none",
               borderRadius: "8px",
               cursor: "pointer",
@@ -162,6 +165,9 @@ function DoctorDetails() {
             style={{
               width: "100%",
               padding: "10px",
+              background: "var(--panel-strong)",
+              color: "var(--text)",
+              border: "1px solid var(--border)",
             }}
           />
 
@@ -195,10 +201,11 @@ function DoctorDetails() {
           <div
             key={review._id}
             style={{
-              border: "1px solid #ddd",
+              border: "1px solid var(--border)",
               padding: "15px",
               borderRadius: "10px",
               marginBottom: "15px",
+              background: "var(--panel-strong)",
             }}
           >
             <h4>{review.patient?.name}</h4>

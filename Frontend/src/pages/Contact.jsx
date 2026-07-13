@@ -39,18 +39,18 @@ function Contact() {
         gap: "40px",
         flexWrap: "wrap",
         padding: "20px",
-        color: isDark ? "white" : "black",
+        color: "var(--text)",
       }}
     >
       {/* Left */}
       <div
         style={{
           flex: 1,
-          background: "#1e40af",
-          color: "white",
+          background: "linear-gradient(135deg, var(--primary-dark), var(--primary))",
+          color: "var(--text)",
           padding: "35px",
           borderRadius: "15px",
-          
+          border: "1px solid var(--border)",
         }}
       >
         <h1>Contact Medicare</h1>
@@ -79,10 +79,11 @@ function Contact() {
       <div
         style={{
           flex: 1,
-          background: isDark ? "#1e293b" : "#fff",
+          background: "var(--panel)",
           padding: "35px",
           borderRadius: "15px",
-          boxShadow: "0 0 20px rgba(0,0,0,.1)",
+          boxShadow: "0 0 20px var(--shadow)",
+          border: "1px solid var(--border)",
         }}
       >
         <h2>Send Message</h2>
@@ -113,9 +114,9 @@ function Contact() {
               width: "100%",
               padding: "12px",
               marginBottom: "15px",
-              background:isDark ? "#334155" : "white",
-              color: isDark ? "white" : "black",
-              border: isDark ? "1px solid #475569" : "1px solid #ccc",
+              background: "var(--panel-strong)",
+              color: "var(--text)",
+              border: "1px solid var(--border)",
             }}
           />
 
@@ -144,6 +145,9 @@ function Contact() {
               width: "100%",
               padding: "12px",
               marginBottom: "20px",
+              background: "var(--panel-strong)",
+              color: "var(--text)",
+              border: "1px solid var(--border)",
             }}
           />
 
@@ -152,8 +156,8 @@ function Contact() {
             style={{
               width: "100%",
               padding: "14px",
-              background: "#1e40af",
-              color: "white",
+              background: "var(--primary)",
+              color: "var(--text)",
               border: "none",
               borderRadius: "8px",
               cursor: "pointer",

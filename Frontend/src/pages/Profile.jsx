@@ -6,30 +6,11 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [isDark, setIsDark] = useState(() =>
-    document.body.classList.contains("dark")
-  );
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     getProfile();
-  }, []);
-
-  useEffect(() => {
-    const updateTheme = () => {
-      setIsDark(document.body.classList.contains("dark"));
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   const getProfile = async () => {
@@ -98,29 +79,28 @@ function Profile() {
     <div
       style={{
         minHeight: "100vh",
-        background: isDark ? "#0f172a" : "#f4f8fc",
+        background: "radial-gradient(circle at top left, #18304f 0%, #0d1b2e 45%, #07111f 100%)",
         padding: "40px",
-        color: isDark ? "#f8fafc" : "#0f172a",
+        color: "var(--text)",
       }}
     >
       <div
         style={{
           maxWidth: "700px",
           margin: "auto",
-          background: isDark ? "#1e293b" : "#f5f5f5",
+          background: "var(--panel)",
           borderRadius: "15px",
-          boxShadow: isDark
-            ? "0 8px 20px rgba(0,0,0,.35)"
-            : "0 8px 20px rgba(0,0,0,.15)",
+          boxShadow: "0 8px 20px var(--shadow)",
           overflow: "hidden",
-          color: isDark ? "#f8fafc" : "#0f172a",
+          color: "var(--text)",
+          border: "1px solid var(--border)",
         }}
       >
         {/* Header */}
         <div
           style={{
-            background: "linear-gradient(135deg,#1e40af,#3b82f6)",
-            color: "white",
+            background: "linear-gradient(135deg, var(--primary-dark), var(--primary))",
+            color: "var(--text)",
             textAlign: "center",
             padding: "30px",
           }}
@@ -143,24 +123,24 @@ function Profile() {
 
         {/* Profile Info */}
         <div style={{ padding: "30px" }}>
-          <h2 style={{ color: "#1e40af" }}>Edit Profile</h2>
+          <h2 style={{ color: "var(--accent)" }}>Edit Profile</h2>
 
-          <label style={{ color: isDark ? "#e2e8f0" : "#0f172a" }}>Name</label>
+          <label style={{ color: "var(--text)" }}>Name</label>
 
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
+            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
           />
 
-          <label style={{ color: isDark ? "#e2e8f0" : "#0f172a" }}>Email</label>
+          <label style={{ color: "var(--text)" }}>Email</label>
 
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
+            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
           />
 
           <button style={blueBtn} onClick={updateProfile}>
@@ -169,7 +149,7 @@ function Profile() {
 
           <hr style={{ margin: "35px 0" }} />
 
-          <h2 style={{ color: "#1e40af" }}>
+          <h2 style={{ color: "var(--accent)" }}>
             Change Password
           </h2>
 
@@ -180,7 +160,7 @@ function Profile() {
             onChange={(e) =>
               setCurrentPassword(e.target.value)
             }
-            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
+            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
           />
 
           <input
@@ -190,7 +170,7 @@ function Profile() {
             onChange={(e) =>
               setNewPassword(e.target.value)
             }
-            style={{ ...inputStyle, background: isDark ? "#334155" : "white", color: isDark ? "#f8fafc" : "#0f172a", borderColor: isDark ? "#475569" : "#ccc" }}
+            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
           />
 
           <button
@@ -210,15 +190,15 @@ const inputStyle = {
   padding: "12px",
   margin: "10px 0 20px",
   borderRadius: "8px",
-  border: "1px solid #ccc",
+  border: "1px solid var(--border)",
   fontSize: "16px",
 };
 
 const blueBtn = {
   width: "100%",
   padding: "12px",
-  background: "#1e40af",
-  color: "white",
+  background: "var(--primary)",
+  color: "var(--text)",
   border: "none",
   borderRadius: "8px",
   cursor: "pointer",
@@ -228,8 +208,8 @@ const blueBtn = {
 const greenBtn = {
   width: "100%",
   padding: "12px",
-  background: "green",
-  color: "white",
+  background: "#16a34a",
+  color: "var(--text)",
   border: "none",
   borderRadius: "8px",
   cursor: "pointer",

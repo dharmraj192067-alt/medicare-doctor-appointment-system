@@ -23,9 +23,7 @@ function Register() {
 
       navigate("/login");
     } catch (error) {
-      alert(
-        error.response?.data?.message || "Registration Failed"
-      );
+      alert(error.response?.data?.message || "Registration Failed");
     }
   };
 
@@ -35,12 +33,13 @@ function Register() {
         maxWidth: "420px",
         margin: "60px auto",
         padding: "30px",
-        background: "#f5f5f5",
+        background: "var(--panel)",
         borderRadius: "12px",
-        boxShadow: "0 0 15px rgba(0,0,0,0.1)",
+        boxShadow: "0 15px 35px var(--shadow)",
+        border: "1px solid var(--border)",
       }}
     >
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "20px", color: "var(--accent)" }}>
         Register
       </h2>
 
@@ -55,6 +54,9 @@ function Register() {
             width: "100%",
             padding: "12px",
             marginBottom: "15px",
+            background: "var(--panel-strong)",
+            color: "var(--text)",
+            border: "1px solid var(--border)",
           }}
         />
 
@@ -68,6 +70,9 @@ function Register() {
             width: "100%",
             padding: "12px",
             marginBottom: "15px",
+            background: "var(--panel-strong)",
+            color: "var(--text)",
+            border: "1px solid var(--border)",
           }}
         />
 
@@ -81,6 +86,9 @@ function Register() {
             width: "100%",
             padding: "12px",
             marginBottom: "20px",
+            background: "var(--panel-strong)",
+            color: "var(--text)",
+            border: "1px solid var(--border)",
           }}
         />
 
@@ -89,8 +97,8 @@ function Register() {
           style={{
             width: "100%",
             padding: "12px",
-            background: "#1e40af",
-            color: "#fff",
+            background: "var(--primary)",
+            color: "var(--text)",
             border: "none",
             borderRadius: "8px",
             cursor: "pointer",
@@ -101,9 +109,8 @@ function Register() {
         </button>
       </form>
 
-      <p style={{ textAlign: "center", marginTop: "20px" }}>
-        Already have an account?{" "}
-        <Link to="/login">Login</Link>
+      <p style={{ textAlign: "center", marginTop: "20px", color: "var(--muted)" }}>
+        Already have an account? <Link to="/login" style={{ color: "var(--accent)" }}>Login</Link>
       </p>
     </div>
   );
