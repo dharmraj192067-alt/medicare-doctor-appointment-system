@@ -76,144 +76,62 @@ function Profile() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "radial-gradient(circle at top left, #18304f 0%, #0d1b2e 45%, #07111f 100%)",
-        padding: "40px",
-        color: "var(--text)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "700px",
-          margin: "auto",
-          background: "var(--panel)",
-          borderRadius: "15px",
-          boxShadow: "0 8px 20px var(--shadow)",
-          overflow: "hidden",
-          color: "var(--text)",
-          border: "1px solid var(--border)",
-        }}
-      >
-        {/* Header */}
-        <div
-          style={{
-            background: "linear-gradient(135deg, var(--primary-dark), var(--primary))",
-            color: "var(--text)",
-            textAlign: "center",
-            padding: "30px",
-          }}
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="Profile"
-            style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "50%",
-              border: "5px solid white",
-              marginBottom: "15px",
-            }}
-          />
+    <div className="container section">
+      <div className="profile-grid">
+        <div className="profile-panel detail-card">
+          <div style={{ textAlign: 'center' }}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="Profile"
+              className="profile-avatar"
+            />
+            <h2>{name}</h2>
+            <p>{email}</p>
+          </div>
 
-          <h2>{name}</h2>
-          <p>{email}</p>
+          <div className="profile-buttons">
+            <button className="button-primary" type="button" onClick={updateProfile}>
+              Update Profile
+            </button>
+          </div>
         </div>
 
-        {/* Profile Info */}
-        <div style={{ padding: "30px" }}>
-          <h2 style={{ color: "var(--accent)" }}>Edit Profile</h2>
-
-          <label style={{ color: "var(--text)" }}>Name</label>
-
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
-          />
-
-          <label style={{ color: "var(--text)" }}>Email</label>
-
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
-          />
-
-          <button style={blueBtn} onClick={updateProfile}>
-            Update Profile
-          </button>
-
-          <hr style={{ margin: "35px 0" }} />
-
-          <h2 style={{ color: "var(--accent)" }}>
-            Change Password
-          </h2>
-
-          <input
-            type="password"
-            placeholder="Current Password"
-            value={currentPassword}
-            onChange={(e) =>
-              setCurrentPassword(e.target.value)
-            }
-            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
-          />
-
-          <input
-            type="password"
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(e) =>
-              setNewPassword(e.target.value)
-            }
-            style={{ ...inputStyle, background: "var(--panel-strong)", color: "var(--text)", borderColor: "var(--border)" }}
-          />
-
-          <button
-            style={greenBtn}
-            onClick={changePassword}
-          >
-            Change Password
-          </button>
+        <div className="profile-panel detail-card profile-form">
+          <div className="input-group">
+            <label>Name</label>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label>Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label>Current Password</label>
+            <input
+              type="password"
+              placeholder="Current Password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>New Password</label>
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <div className="profile-buttons">
+            <button className="button-secondary" type="button" onClick={changePassword}>
+              Change Password
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  margin: "10px 0 20px",
-  borderRadius: "8px",
-  border: "1px solid var(--border)",
-  fontSize: "16px",
-};
-
-const blueBtn = {
-  width: "100%",
-  padding: "12px",
-  background: "var(--primary)",
-  color: "var(--text)",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-  fontSize: "16px",
-};
-
-const greenBtn = {
-  width: "100%",
-  padding: "12px",
-  background: "#16a34a",
-  color: "var(--text)",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-  fontSize: "16px",
-};
 
 export default Profile;

@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import "../styles/admin.css";
-import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
   const [appointments, setAppointments] = useState([]);
   const [stats, setStats] = useState({});
   const [filter, setFilter] = useState("All");
-
-  const navigate = useNavigate();
+  const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
     getAppointments();
@@ -33,27 +31,28 @@ function AdminDashboard() {
     }
   };
 
+  useEffect(() => {
+    if (!feedback) return;
+
+    const timer = setTimeout(() => setFeedback(""), 3000);
+    return () => clearTimeout(timer);
+  }, [feedback]);
+
   const updateStatus = async (id, status) => {
     try {
       await api.put(`/appointments/${id}`, { status });
-
-      alert(`Appointment ${status} Successfully ✅`);
-      getAppointments();
-      getStats();
+      setFeedback(`Appointment ${status} successfully.`);
+      await Promise.all([getAppointments(), getStats()]);
     } catch (error) {
       console.log(error);
     }
   };
 
   const deleteAppointment = async (id) => {
-    if (!window.confirm("Delete this appointment?")) return;
-
     try {
       await api.delete(`/appointments/${id}`);
-
-      alert("Appointment Deleted Successfully ✅");
-      getAppointments();
-      getStats();
+      setFeedback("Appointment deleted successfully.");
+      await Promise.all([getAppointments(), getStats()]);
     } catch (error) {
       console.log(error);
     }
@@ -65,163 +64,84 @@ function AdminDashboard() {
       : appointments.filter((item) => item.status === filter);
 
   return (
-    <div style={{ padding: "40px", color: "var(--text)" }}>
-
-      
-     
-      {/* Cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-          gap: "20px",
-          marginBottom: "30px",
-        }}
-      >
-        
-        <div
-          className="card"
-          style={{ cursor: "pointer" }}
-          onClick={() => setFilter("Approved")}
-        >
-          <h3>✅ Approved</h3>
-          <h1>
-            {appointments.filter((a) => a.status === "Approved").length}
-          </h1>
-        </div>
-
-        <div
-          className="card"
-          style={{ cursor: "pointer" }}
-          onClick={() => setFilter("Completed")}
-        >
-          <h3>🎉 Completed</h3>
-          <h1>
-            {appointments.filter((a) => a.status === "Completed").length}
-          </h1>
-        </div>
-
-        <div
-          className="card"
-          style={{ cursor: "pointer" }}
-          onClick={() => setFilter("Rejected")}
-        >
-          <h3>❌ Rejected</h3>
-          <h1>
-            {appointments.filter((a) => a.status === "Rejected").length}
-          </h1>
+    <div className="container section">
+      <div className="section-head">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p>Manage appointments, track status and review performance metrics.</p>
         </div>
       </div>
 
-      <h2>Total Appointments : {filteredAppointments.length}</h2>
-
-      {filteredAppointments.map((item) => (
+      {feedback && (
         <div
-          key={item._id}
           style={{
-            border: "1px solid var(--border)",
-            borderRadius: "10px",
-            padding: "20px",
-            marginBottom: "20px",
-            boxShadow: "0 0 10px var(--shadow)",
-            background: "var(--panel)",
+            marginBottom: "16px",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            background: "#e8f5e9",
+            color: "#2e7d32",
+            border: "1px solid #a5d6a7",
+            fontWeight: 600,
           }}
         >
-          <h3>{item.patient?.name}</h3>
+          {feedback}
+        </div>
+      )}
 
+      <div className="grid-3" style={{ marginBottom: '32px' }}>
+        {['Approved', 'Completed', 'Rejected'].map((status) => (
+          <div className="card" key={status} style={{ cursor: 'pointer' }} onClick={() => setFilter(status)}>
+            <h3>{status}</h3>
+            <h1>{appointments.filter((a) => a.status === status).length}</h1>
+          </div>
+        ))}
+      </div>
+
+      <h2 style={{ marginBottom: '24px' }}>Total Appointments : {filteredAppointments.length}</h2>
+
+      {filteredAppointments.map((item) => (
+        <div className="appointment-card" key={item._id}>
+          <h3>{item.patient?.name}</h3>
           <p>
             <strong>Doctor:</strong> {item.doctor?.name}
           </p>
-
           <p>
-            <strong>Date:</strong>{" "}
-            {new Date(item.appointmentDate).toLocaleDateString()}
+            <strong>Date:</strong> {new Date(item.appointmentDate).toLocaleDateString()}
           </p>
-
           <p>
             <strong>Time:</strong> {item.time}
           </p>
-
           <p>
             <strong>Reason:</strong> {item.reason}
           </p>
-
           <p>
-            <strong>Status:</strong>{" "}
+            <strong>Status:</strong>{' '}
             <span
-              style={{
-                color:
-                  item.status === "Approved"
-                    ? "green"
-                    : item.status === "Rejected"
-                    ? "red"
-                    : item.status === "Completed"
-                    ? "blue"
-                    : "orange",
-                fontWeight: "bold",
-              }}
+              className={`status-pill ${
+                item.status === 'Approved'
+                  ? 'active'
+                  : item.status === 'Rejected'
+                  ? 'error'
+                  : item.status === 'Completed'
+                  ? 'success'
+                  : ''
+              }`}
             >
               {item.status}
             </span>
           </p>
 
-          <div style={{ marginTop: "15px" }}>
-            <button
-              onClick={() => updateStatus(item._id, "Approved")}
-              style={{
-                background: "green",
-                color: "white",
-                border: "none",
-                padding: "8px 15px",
-                borderRadius: "5px",
-                marginRight: "10px",
-                cursor: "pointer",
-              }}
-            >
+          <div className="profile-buttons" style={{ justifyContent: 'flex-start' }}>
+            <button className="button-primary" type="button" onClick={() => updateStatus(item._id, 'Approved')}>
               Approve
             </button>
-
-            <button
-              onClick={() => updateStatus(item._id, "Completed")}
-              style={{
-                background: "blue",
-                color: "white",
-                border: "none",
-                padding: "8px 15px",
-                borderRadius: "5px",
-                marginRight: "10px",
-                cursor: "pointer",
-              }}
-            >
+            <button className="button-secondary" type="button" onClick={() => updateStatus(item._id, 'Completed')}>
               Complete
             </button>
-
-            <button
-              onClick={() => updateStatus(item._id, "Rejected")}
-              style={{
-                background: "orange",
-                color: "white",
-                border: "none",
-                padding: "8px 15px",
-                borderRadius: "5px",
-                marginRight: "10px",
-                cursor: "pointer",
-              }}
-            >
+            <button className="button-secondary" type="button" onClick={() => updateStatus(item._id, 'Rejected')}>
               Reject
             </button>
-
-            <button
-              onClick={() => deleteAppointment(item._id)}
-              style={{
-                background: "red",
-                color: "white",
-                border: "none",
-                padding: "8px 15px",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
+            <button className="button-ghost" type="button" onClick={() => deleteAppointment(item._id)}>
               Delete
             </button>
           </div>

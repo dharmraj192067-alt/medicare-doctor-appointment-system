@@ -5,139 +5,111 @@ import api from "../services/api";
 function BookAppointment() {
   const { doctorId } = useParams();
   const navigate = useNavigate();
-const [payment, setPayment] = useState("Khalti");
+  const [payment, setPayment] = useState("Khalti");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [reason, setReason] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-console.log("Doctor ID:", doctorId);
-console.log("Date:", date);
-console.log("Time:", time);
-console.log("Reason:", reason);
-  try {
-    const token = localStorage.getItem("token");
-alert(`Payment Successful ✅
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-Method: ${payment}
+    if (isSubmitting) return;
 
-Transaction ID: TXN${Math.floor(Math.random() * 1000000)}`);
-    await api.post(
-      "/appointments",
-      {
-        doctor: doctorId,
-        appointmentDate: date,
-        time:time,
-        reason: reason,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    try {
+      setIsSubmitting(true);
+      const token = localStorage.getItem("token");
+
+      await api.post(
+        "/appointments",
+        {
+          doctor: doctorId,
+          appointmentDate: date,
+          time: time,
+          reason: reason,
+          paymentMethod: payment,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    alert("Appointment Booked Successfully ✅");
-    navigate("/appointments");
+      navigate("/appointments", {
+        state: { successMessage: "Appointment booked successfully!" },
+      });
+    } catch (error) {
+      console.log(error.response?.data);
+      alert(error.response?.data?.message || "Unable to book appointment");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-  } catch (error) {
-  console.log(error.response.data);
-  console.log(error.response.data.errors);
-
-  alert(error.response.data.message);
-};
-};
   return (
-    <div style={{ maxWidth: "520px", margin: "40px auto", padding: "30px", background: "var(--panel)", borderRadius: "16px", boxShadow: "0 12px 30px var(--shadow)", border: "1px solid var(--border)", color: "var(--text)" }}>
-      <h1 style={{ marginBottom: "20px", color: "var(--accent)" }}>Book Appointment</h1>
+    <div className="container section">
+      <div className="form-panel" style={{ maxWidth: "560px", margin: "0 auto" }}>
+        <h2>Book Appointment</h2>
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form-grid">
+          <div className="input-group">
+            <label>Date</label>
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+          </div>
 
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        />
+          <div className="input-group">
+            <label>Time</label>
+            <select value={time} onChange={(e) => setTime(e.target.value)} required>
+              <option value="">Select Time</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>12:00 PM</option>
+              <option>2:00 PM</option>
+              <option>3:00 PM</option>
+            </select>
+          </div>
 
-        <select
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        >
-          <option value="">Select Time</option>
-          <option>10:00 AM</option>
-          <option>11:00 AM</option>
-          <option>12:00 PM</option>
-          <option>2:00 PM</option>
-          <option>3:00 PM</option>
-        </select>
+          <div className="input-group">
+            <label>Reason / Symptoms</label>
+            <textarea
+              placeholder="Reason / Symptoms"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              rows="5"
+            />
+          </div>
 
-        <br /><br />
+          <div className="input-group">
+            <label>Payment Method</label>
+            <div style={{ display: "grid", gap: "12px" }}>
+              {['Khalti', 'eSewa', 'Cash'].map((method) => (
+                <label key={method} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <input
+                    type="radio"
+                    name="payment"
+                    value={method}
+                    checked={payment === method}
+                    onChange={(e) => setPayment(e.target.value)}
+                  />
+                  {method}
+                </label>
+              ))}
+            </div>
+          </div>
 
-        <textarea
-  placeholder="Reason / Symptoms"
-  value={reason}
-  onChange={(e) => setReason(e.target.value)}
-  rows="5"
-  style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-/>
+          <div className="input-group">
+            <label>Consultation Fee</label>
+            <p style={{ color: 'var(--on-surface-variant)' }}>Rs. 1000</p>
+          </div>
 
-<br /><br />
-
-<h3>Payment Method</h3>
-
-<label>
-  <input
-    type="radio"
-    name="payment"
-    value="Khalti"
-    checked={payment === "Khalti"}
-    onChange={(e) => setPayment(e.target.value)}
-  />
-  🟣 Khalti
-</label>
-
-<br /><br />
-
-<label>
-  <input
-    type="radio"
-    name="payment"
-    value="eSewa"
-    checked={payment === "eSewa"}
-    onChange={(e) => setPayment(e.target.value)}
-  />
-  🟢 eSewa
-</label>
-
-<br /><br />
-
-<label>
-  <input
-    type="radio"
-    name="payment"
-    value="Cash"
-    checked={payment === "Cash"}
-    onChange={(e) => setPayment(e.target.value)}
-  />
-  💵 Cash
-</label>
-
-<br /><br />
-
-<h3>Consultation Fee : Rs. 1000</h3>
-
-<br />
-
-<button type="submit" style={{ width: "100%", padding: "12px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>
-  Confirm Appointment
-</button>
-
-      </form>
+          <div className="form-actions">
+            <button className="button-primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Booking..." : "Confirm Appointment"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -21,9 +21,9 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login Successful ✅");
-
-      navigate("/");
+      navigate("/", {
+        state: { successMessage: "Login successful!" },
+      });
     } catch (error) {
       console.log(error.response?.data);
 
@@ -34,11 +34,9 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-
-        <h2>🔐 Login</h2>
+        <h2>Login</h2>
 
         <form onSubmit={loginUser}>
-
           <input
             type="email"
             placeholder="Enter Email"
@@ -55,12 +53,8 @@ function Login() {
             required
           />
 
-          <button type="submit">
-            Login
-          </button>
-
+          <button type="submit">Login</button>
         </form>
-
       </div>
     </div>
   );

@@ -13,94 +13,46 @@ function Payment() {
   const payNow = () => {
     const txn = "TXN" + Math.floor(Math.random() * 1000000);
 
-    alert(
-      `Payment Successful ✅
-
-Method: ${method}
-
-Transaction ID:
-${txn}`
-    );
-
-    navigate("/appointments");
+    navigate("/appointments", {
+      state: {
+        successMessage: `Payment successful! Transaction ID: ${txn}`,
+      },
+    });
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "500px",
-        margin: "40px auto",
-        padding: "25px",
-        border: "1px solid var(--border)",
-        borderRadius: "10px",
-        background: "var(--panel)",
-        boxShadow: "0 0 20px var(--shadow)",
-        color: "var(--text)",
-      }}
-    >
-      <h2>Payment</h2>
+    <div className="container section">
+      <div className="form-panel" style={{ maxWidth: "520px", margin: "0 auto" }}>
+        <h2>Payment</h2>
 
-      <hr />
+        <div style={{ marginBottom: '24px' }}>
+          <p style={{ color: 'var(--on-surface-variant)', marginBottom: '10px' }}>Doctor</p>
+          <h3>{doctor}</h3>
+        </div>
 
-      <h3>{doctor}</h3>
+        <div style={{ marginBottom: '24px' }}>
+          <p style={{ color: 'var(--on-surface-variant)', marginBottom: '10px' }}>Amount</p>
+          <h2>Rs. {amount}</h2>
+        </div>
 
-      <h2>Amount : Rs. {amount}</h2>
+        <div className="input-group">
+          <label>Payment Method</label>
+          <div style={{ display: 'grid', gap: '14px' }}>
+            {['Khalti', 'eSewa', 'Cash'].map((option) => (
+              <label key={option} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <input type="radio" value={option} checked={method === option} onChange={(e) => setMethod(e.target.value)} />
+                {option}
+              </label>
+            ))}
+          </div>
+        </div>
 
-      <br />
-
-      <label>
-        <input
-          type="radio"
-          value="Khalti"
-          checked={method === "Khalti"}
-          onChange={(e) => setMethod(e.target.value)}
-        />
-        🟣 Khalti
-      </label>
-
-      <br />
-      <br />
-
-      <label>
-        <input
-          type="radio"
-          value="eSewa"
-          checked={method === "eSewa"}
-          onChange={(e) => setMethod(e.target.value)}
-        />
-        🟢 eSewa
-      </label>
-
-      <br />
-      <br />
-
-      <label>
-        <input
-          type="radio"
-          value="Cash"
-          checked={method === "Cash"}
-          onChange={(e) => setMethod(e.target.value)}
-        />
-        💵 Cash
-      </label>
-
-      <br />
-      <br />
-
-      <button
-        onClick={payNow}
-        style={{
-          width: "100%",
-          padding: "12px",
-          background: "var(--primary)",
-          color: "var(--text)",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-        }}
-      >
-        Pay Now
-      </button>
+        <div className="form-actions">
+          <button className="button-primary" type="button" onClick={payNow}>
+            Pay Now
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

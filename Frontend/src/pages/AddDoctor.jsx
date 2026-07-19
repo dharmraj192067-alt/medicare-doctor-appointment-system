@@ -24,97 +24,65 @@ function AddDoctor() {
       });
     }
   };
-const addDoctor = async (e) => {
-  e.preventDefault();
 
-  try {
-    const token = localStorage.getItem("token");
+  const addDoctor = async (e) => {
+    e.preventDefault();
 
-    console.log("Token:", token);
-    console.log("Image:", doctor.image);
+    try {
+      const token = localStorage.getItem("token");
 
-    const formData = new FormData();
-    formData.append("name", doctor.name);
-    formData.append("specialization", doctor.specialization);
-    formData.append("experience", doctor.experience);
-    formData.append("fees", doctor.fees);
-    formData.append("available", doctor.available);
-    formData.append("image", doctor.image);
+      const formData = new FormData();
+      formData.append("name", doctor.name);
+      formData.append("specialization", doctor.specialization);
+      formData.append("experience", doctor.experience);
+      formData.append("fees", doctor.fees);
+      formData.append("available", doctor.available);
+      formData.append("image", doctor.image);
 
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
+      await api.post("/doctors", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert("Doctor Added Successfully ✅");
+    } catch (error) {
+      console.log(error.response?.data);
     }
+  };
 
-    const res = await api.post("/doctors", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    console.log(res.data);
-
-    alert("Doctor Added Successfully ✅");
-  } catch (error) {
-    console.log(error.response?.data);
-  }
-};
   return (
-    <div style={{ maxWidth: "520px", margin: "40px auto", padding: "30px", background: "var(--panel)", borderRadius: "16px", boxShadow: "0 12px 30px var(--shadow)", border: "1px solid var(--border)" }}>
-      <h1 style={{ marginBottom: "20px", color: "var(--accent)" }}>Add Doctor</h1>
-
-      <form onSubmit={addDoctor}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Doctor Name"
-          value={doctor.name}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        />
-
-        <input
-          type="text"
-          name="specialization"
-          placeholder="Specialization"
-          value={doctor.specialization}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        />
-
-        <input
-          type="number"
-          name="experience"
-          placeholder="Experience"
-          value={doctor.experience}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        />
-
-        <input
-          type="number"
-          name="fees"
-          placeholder="Fees"
-          value={doctor.fees}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", background: "var(--panel-strong)", color: "var(--text)" }}
-        />
-
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={handleChange}
-          style={{ width: "100%", padding: "10px", marginBottom: "15px", color: "var(--muted)" }}
-        />
-
-        <button type="submit" style={{ width: "100%", padding: "12px", background: "var(--primary)", color: "var(--text)", border: "none", borderRadius: "8px" }}>
-          Add Doctor
-        </button>
-      </form>
+    <div className="container section">
+      <div className="form-panel" style={{ maxWidth: "560px", margin: "0 auto" }}>
+        <h2>Add Doctor</h2>
+        <form onSubmit={addDoctor} className="form-grid">
+          <div className="input-group">
+            <label>Name</label>
+            <input name="name" value={doctor.name} onChange={handleChange} placeholder="Doctor Name" required />
+          </div>
+          <div className="input-group">
+            <label>Specialization</label>
+            <input name="specialization" value={doctor.specialization} onChange={handleChange} placeholder="Specialization" required />
+          </div>
+          <div className="input-group">
+            <label>Experience</label>
+            <input name="experience" type="number" value={doctor.experience} onChange={handleChange} placeholder="Experience" required />
+          </div>
+          <div className="input-group">
+            <label>Fees</label>
+            <input name="fees" type="number" value={doctor.fees} onChange={handleChange} placeholder="Fees" required />
+          </div>
+          <div className="input-group">
+            <label>Doctor Image</label>
+            <input name="image" type="file" accept="image/*" onChange={handleChange} />
+          </div>
+          <div className="form-actions">
+            <button className="button-primary" type="submit">
+              Add Doctor
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

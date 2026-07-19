@@ -1,85 +1,107 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../styles/home.css";
 
 function Home() {
+  const location = useLocation();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(Boolean(location.state?.successMessage));
+
+  useEffect(() => {
+    if (!location.state?.successMessage) return;
+
+    setShowSuccessMessage(true);
+    const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
+
+    return () => clearTimeout(timer);
+  }, [location.state?.successMessage]);
+
   return (
-    <>
-      <section className="hero" data-aos="fade-up">
-        <div className="hero-left" data-aos="fade-right">
-          <h1>Book Your Doctor Appointment Online</h1>
+    <main>
+      <section className="hero-section">
+        <div className="container hero-inner">
+          <div className="hero-panel">
+            <span className="hero-badge">
+              <span className="material-symbols-outlined">health_and_safety</span>
+              Trusted healthcare partner
+            </span>
 
-          <p>
-            Find experienced doctors, book appointments instantly and manage
-            your healthcare from anywhere.
-          </p>
+            {showSuccessMessage && (
+              <div
+                style={{
+                  marginBottom: "16px",
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  background: "#e8f5e9",
+                  color: "#2e7d32",
+                  border: "1px solid #a5d6a7",
+                  fontWeight: 600,
+                }}
+              >
+                {location.state?.successMessage}
+              </div>
+            )}
 
-          <div className="hero-buttons">
-            <Link to="/doctors">
-              <button className="primary-btn">Find Doctors</button>
-            </Link>
+            <h1 className="hero-title">
+              Your Health,
+              <br />
+              <span>Our Priority</span>
+            </h1>
 
-            <Link to="/register">
-              <button className="secondary-btn">Get Started</button>
-            </Link>
-          </div>
-        </div>
+            <p className="hero-lead">
+              Experience world-class healthcare with Medicare. We connect you with top-rated specialists and offer 24/7 support for all your medical needs.
+            </p>
 
-        <div className="hero-right" data-aos="fade-left">
-          <img
-            src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600"
-            alt="Doctor"
-          />
-        </div>
-      </section>
+            <div className="hero-actions">
+              <Link to="/doctors" className="button-primary">
+                <span className="material-symbols-outlined">calendar_month</span>
+                Book Appointment
+              </Link>
+              <Link to="/register" className="button-secondary">
+                View Our Services
+              </Link>
+            </div>
 
-      <section className="stats-section">
-        <div>
-          <h1>50+</h1>
-          <p>Doctors</p>
-        </div>
-
-        <div>
-          <h1>1000+</h1>
-          <p>Patients</p>
-        </div>
-
-        <div>
-          <h1>24/7</h1>
-          <p>Support</p>
-        </div>
-
-        <div>
-          <h1>99%</h1>
-          <p>Success Rate</p>
-        </div>
-      </section>
-
-      <section className="features">
-        <h2 data-aos="fade-up">Why Choose Medicare?</h2>
-
-        <div className="feature-grid">
-          <div className="feature-card" data-aos="zoom-in">
-            <h3>👨‍⚕️ Expert Doctors</h3>
-            <p>Consult experienced specialists from different departments.</p>
+            <div className="section-label">
+              <span className="material-symbols-outlined">verified</span>
+              JCI Accredited • 500+ Specialists • 24/7 Support
+            </div>
           </div>
 
-          <div className="feature-card" data-aos="zoom-in">
-            <h3>📅 Easy Booking</h3>
-            <p>Book appointments online in just a few clicks.</p>
-          </div>
-
-          <div className="feature-card" data-aos="zoom-in">
-            <h3>🕒 24/7 Support</h3>
-            <p>We're available anytime to assist your healthcare needs.</p>
-          </div>
-
-          <div className="feature-card" data-aos="zoom-in">
-            <h3>💊 Trusted Service</h3>
-            <p>Secure, reliable and patient-focused healthcare platform.</p>
+          <div className="hero-media">
+            <img
+              src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=1200"
+              alt="Modern healthcare clinic"
+            />
           </div>
         </div>
       </section>
-    </>
+
+      <section className="section section-alt">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <h2>Comprehensive Care Services</h2>
+              <p>We provide a wide range of specialized medical services tailored to your individual health journey.</p>
+            </div>
+          </div>
+
+          <div className="feature-grid">
+            <div className="feature-card">
+              <h3>Cardiology</h3>
+              <p>Expert heart care including diagnostics, prevention, and advanced treatment for cardiovascular conditions.</p>
+            </div>
+            <div className="feature-card">
+              <h3>Neurology</h3>
+              <p>Specialized care for disorders of the nervous system, providing cutting-edge neurological assessments.</p>
+            </div>
+            <div className="feature-card">
+              <h3>Pediatrics</h3>
+              <p>Comprehensive healthcare for infants, children, and adolescents in a warm, welcoming environment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
 

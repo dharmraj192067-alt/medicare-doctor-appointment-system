@@ -1,12 +1,24 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import api from "../services/api";
 
 function MyAppointments() {
+  const location = useLocation();
   const [appointments, setAppointments] = useState([]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(Boolean(location.state?.successMessage));
 
   useEffect(() => {
     getAppointments();
   }, []);
+
+  useEffect(() => {
+    if (!location.state?.successMessage) return;
+
+    setShowSuccessMessage(true);
+    const timer = setTimeout(() => setShowSuccessMessage(false), 3000);
+
+    return () => clearTimeout(timer);
+  }, [location.state?.successMessage]);
 
   const getAppointments = async () => {
     try {
@@ -25,66 +37,66 @@ function MyAppointments() {
   };
 
   return (
-    <div style={{ padding: "40px", color: "var(--text)" }}>
-      <h1 style={{ marginBottom: "30px" }}>My Appointments</h1>
+    <div className="container section">
+      <div className="section-head">
+        <div>
+          <h2>My Appointments</h2>
+          <p>Review your upcoming and past appointments in one place.</p>
+        </div>
+      </div>
+
+      {showSuccessMessage && (
+        <div
+          style={{
+            marginBottom: "16px",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            background: "#e8f5e9",
+            color: "#2e7d32",
+            border: "1px solid #a5d6a7",
+            fontWeight: 600,
+          }}
+        >
+          {location.state?.successMessage}
+        </div>
+      )}
 
       {appointments.length === 0 ? (
-        <h2>No Appointments Found</h2>
+        <h3>No Appointments Found</h3>
       ) : (
         appointments.map((item) => (
-          <div
-            key={item._id}
-            style={{
-              border: "1px solid var(--border)",
-              borderRadius: "10px",
-              padding: "20px",
-              marginBottom: "20px",
-              boxShadow: "0 2px 8px var(--shadow)",
-              background: "var(--panel)",
-            }}
-          >
+          <div className="appointment-card" key={item._id}>
             <h2>{item.doctor.name}</h2>
-
             <p>
-              <strong>Specialization:</strong>{" "}
-              {item.doctor.specialization}
+              <strong>Specialization:</strong> {item.doctor.specialization}
             </p>
-
             <p>
-              <strong>Experience:</strong>{" "}
-              {item.doctor.experience} Years
+              <strong>Experience:</strong> {item.doctor.experience} Years
             </p>
-
             <p>
               <strong>Fees:</strong> Rs. {item.doctor.fees}
             </p>
-
             <p>
               <strong>Date:</strong> {item.appointmentDate}
             </p>
-
             <p>
               <strong>Time:</strong> {item.time}
             </p>
-
             <p>
               <strong>Reason:</strong> {item.reason}
             </p>
-
             <p>
-              <strong>Status:</strong>{" "}
+              <strong>Status:</strong>{' '}
               <span
-                style={{
-                  color:
-                    item.status === "Approved"
-                      ? "green"
-                      : item.status === "Cancelled"
-                      ? "red"
-                      : item.status === "Completed"
-                      ? "blue"
-                      : "orange",
-                  fontWeight: "bold",
-                }}
+                className={`status-pill ${
+                  item.status === 'Approved'
+                    ? 'active'
+                    : item.status === 'Rejected'
+                    ? 'error'
+                    : item.status === 'Completed'
+                    ? 'success'
+                    : ''
+                }`}
               >
                 {item.status}
               </span>

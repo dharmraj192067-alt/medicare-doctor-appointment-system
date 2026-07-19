@@ -28,90 +28,42 @@ function Register() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "420px",
-        margin: "60px auto",
-        padding: "30px",
-        background: "var(--panel)",
-        borderRadius: "12px",
-        boxShadow: "0 15px 35px var(--shadow)",
-        border: "1px solid var(--border)",
-      }}
-    >
-      <h2 style={{ textAlign: "center", marginBottom: "20px", color: "var(--accent)" }}>
-        Register
-      </h2>
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Register</h2>
 
-      <form onSubmit={registerUser}>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "15px",
-            background: "var(--panel-strong)",
-            color: "var(--text)",
-            border: "1px solid var(--border)",
-          }}
-        />
+        <form onSubmit={registerUser}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
-        <input
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "15px",
-            background: "var(--panel-strong)",
-            color: "var(--text)",
-            border: "1px solid var(--border)",
-          }}
-        />
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            background: "var(--panel-strong)",
-            color: "var(--text)",
-            border: "1px solid var(--border)",
-          }}
-        />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "var(--primary)",
-            color: "var(--text)",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
-        >
-          Register
-        </button>
-      </form>
+          <button type="submit">Register</button>
+        </form>
 
-      <p style={{ textAlign: "center", marginTop: "20px", color: "var(--muted)" }}>
-        Already have an account? <Link to="/login" style={{ color: "var(--accent)" }}>Login</Link>
-      </p>
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
