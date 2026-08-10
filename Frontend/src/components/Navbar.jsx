@@ -10,8 +10,6 @@ function Navbar() {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
-    alert("Logout Successful ✅");
     navigate("/login");
   };
 
@@ -28,25 +26,17 @@ function Navbar() {
             <Link to="/">Home</Link>
           </li>
 
-          {user?.role !== "admin" && (
+          {user?.role !== "admin" && token && (
             <>
               <li>
                 <Link to="/doctors">Doctors</Link>
               </li>
-
-              {token && (
-                <>
-                  <li>
-                    <Link to="/appointments">Appointments</Link>
-                  </li>
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact">Contact</Link>
-                  </li>
-                </>
-              )}
+              <li>
+                <Link to="/appointments">Appointments</Link>
+              </li>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
             </>
           )}
 

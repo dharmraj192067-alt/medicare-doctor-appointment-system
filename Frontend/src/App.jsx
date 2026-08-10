@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -18,6 +18,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  return token ? children : <Navigate to="/login" replace />;
+};
+
 function App() {
 useEffect(() => {
   AOS.init({
@@ -32,16 +39,15 @@ useEffect(() => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/doctors" element={<Doctors />} />
-       <Route path="/book/:doctorId" element={<BookAppointment />} />
-        <Route path="/appointments" element={<MyAppointments />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/doctor/:id" element={<DoctorDetails />} />
-        <Route path="/add-doctor" element={<AddDoctor />} />
-        <Route path="/edit-doctor/:id" element={<EditDoctor />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/doctors" element={<ProtectedRoute><Doctors /></ProtectedRoute>} />
+        <Route path="/book/:doctorId" element={<ProtectedRoute><BookAppointment /></ProtectedRoute>} />
+        <Route path="/appointments" element={<ProtectedRoute><MyAppointments /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/doctor/:id" element={<ProtectedRoute><DoctorDetails /></ProtectedRoute>} />
+        <Route path="/add-doctor" element={<ProtectedRoute><AddDoctor /></ProtectedRoute>} />
+        <Route path="/edit-doctor/:id" element={<ProtectedRoute><EditDoctor /></ProtectedRoute>} />
+        <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
       </Routes>
       <Footer />
     </BrowserRouter>

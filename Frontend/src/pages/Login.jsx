@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import "../styles/login.css";
+import toast from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,13 +22,20 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      navigate("/", {
-        state: { successMessage: "Login successful!" },
-      });
+      toast.success("Login Successful ✅");
+
+      if (res.data.user?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error.response?.data);
 
-      alert(error.response?.data?.message || "Login Failed");
+      // Error Toast
+      toast.error(
+        error.response?.data?.message || "Login Failed ❌"
+      );
     }
   };
 
