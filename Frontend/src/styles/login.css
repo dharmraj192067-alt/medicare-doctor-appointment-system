@@ -4,7 +4,12 @@
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.18), transparent 30%),
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(96, 165, 250, 0.18),
+      transparent 30%
+    ),
     var(--surface);
 }
 
@@ -20,12 +25,23 @@
 .login-card h2 {
   font-size: 2.2rem;
   margin-bottom: 28px;
+  text-align: center;
 }
 
 .login-card input {
   width: 100%;
   padding: 16px 18px;
   margin-bottom: 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+.login-card input:focus {
+  border-color: var(--secondary);
 }
 
 .login-card button {
@@ -35,6 +51,13 @@
   background: var(--primary);
   color: var(--on-primary);
   font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-card button:hover {
+  transform: translateY(-2px);
 }
 
 .login-card p {
@@ -46,4 +69,63 @@
 .login-card a {
   color: var(--secondary);
   font-weight: 700;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 768px) {
+  .login-container {
+    min-height: calc(100vh - 120px);
+    padding: 30px 18px;
+  }
+
+  .login-card {
+    padding: 34px 28px;
+    border-radius: 1.5rem;
+  }
+
+  .login-card h2 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+  .login-container {
+    min-height: calc(100vh - 100px);
+    padding: 24px 14px;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 28px 18px;
+    border-radius: 1.25rem;
+  }
+
+  .login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 22px;
+  }
+
+  .login-card input {
+    padding: 14px 15px;
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+
+  .login-card button {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .login-card p {
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
