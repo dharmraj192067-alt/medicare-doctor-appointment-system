@@ -87,6 +87,9 @@ const loginUser = async (req, res) => {
       });
     }
 
+    const safeUser = user.toObject ? user.toObject() : { ...user };
+    delete safeUser.password;
+
     // Generate JWT Token
     const token = jwt.sign(
       { id: user._id },
@@ -98,7 +101,7 @@ const loginUser = async (req, res) => {
       status: "success",
       message: "Login Successful",
       token,
-      user,
+      user: safeUser,
     });
 
   } catch (error) {

@@ -18,6 +18,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
+import { Toaster } from "react-hot-toast";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");

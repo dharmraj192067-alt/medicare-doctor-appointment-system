@@ -19,11 +19,16 @@ function Login() {
         password,
       });
 
+      // Save login information
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      toast.success("Login Successful ✅");
+      // Success message - No OK button
+      toast.success("Login Successful ✅", {
+        duration: 2000,
+      });
 
+      // Redirect according to user role
       if (res.data.user?.role === "admin") {
         navigate("/admin");
       } else {
@@ -32,9 +37,12 @@ function Login() {
     } catch (error) {
       console.log(error.response?.data);
 
-      // Error Toast
+      // Error message - No OK button
       toast.error(
-        error.response?.data?.message || "Login Failed ❌"
+        error.response?.data?.message || "Login Failed ❌",
+        {
+          duration: 3000,
+        }
       );
     }
   };
@@ -61,7 +69,9 @@ function Login() {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit">
+            Login
+          </button>
         </form>
       </div>
     </div>
