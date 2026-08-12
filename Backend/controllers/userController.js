@@ -18,9 +18,13 @@ const registerUser = async (req, res) => {
       });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     console.log("Step 1: Checking existing user...");
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({
+      email: { $regex: new RegExp(`^${normalizedEmail}$`, "i") },
+    });
 
     if (existingUser) {
       return res.status(400).json({
@@ -37,7 +41,7 @@ const registerUser = async (req, res) => {
 
     const user = await User.create({
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
     });
 
@@ -67,8 +71,12 @@ const loginUser = async (req, res) => {
     console.log("Body:", req.body);
     const { email, password } = req.body;
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     // Check if user exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      email: { $regex: new RegExp(`^${normalizedEmail}$`, "i") },
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -149,7 +157,10 @@ const updateUserProfile = async (req, res) => {
     }
 
     user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
+
+    if (req.body.email) {
+      user.email = req.body.email.trim().toLowerCase();
+    }
 
     const updatedUser = await user.save();
 

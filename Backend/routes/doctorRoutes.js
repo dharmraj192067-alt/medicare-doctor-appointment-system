@@ -11,6 +11,6 @@ router.get("/", getDoctors);
 router.get("/:id", getDoctorById );
 router.put("/:id", upload.single("image"), updateDoctor);
 router.delete("/:id", protect, admin, deleteDoctor);
-router.post("/", upload.single("image"), addDoctor);
+router.post("/", protect, admin, upload.single("image"), addDoctor);
 // router.get("/", getDoctors);
 module.exports = router;
