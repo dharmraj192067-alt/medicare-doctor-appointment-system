@@ -26,6 +26,21 @@ const ProtectedRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" replace />;
 };
 
+const AdminRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user?.role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
 function App() {
 useEffect(() => {
   AOS.init({
@@ -44,10 +59,10 @@ useEffect(() => {
         <Route path="/book/:doctorId" element={<ProtectedRoute><BookAppointment /></ProtectedRoute>} />
         <Route path="/appointments" element={<ProtectedRoute><MyAppointments /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/doctor/:id" element={<ProtectedRoute><DoctorDetails /></ProtectedRoute>} />
-        <Route path="/add-doctor" element={<ProtectedRoute><AddDoctor /></ProtectedRoute>} />
-        <Route path="/edit-doctor/:id" element={<ProtectedRoute><EditDoctor /></ProtectedRoute>} />
+        <Route path="/add-doctor" element={<AdminRoute><AddDoctor /></AdminRoute>} />
+        <Route path="/edit-doctor/:id" element={<AdminRoute><EditDoctor /></AdminRoute>} />
         <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
       </Routes>
       <Footer />

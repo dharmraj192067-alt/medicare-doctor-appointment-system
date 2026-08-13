@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./DoctorCard.css";
 
 function DoctorCard({ doctor }) {
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const imageUrl = doctor.image
     ? `http://127.0.0.1:3000/uploads/${encodeURIComponent(doctor.image)}`
     : "https://placehold.co/120x120?text=Doctor";
@@ -32,9 +33,11 @@ function DoctorCard({ doctor }) {
           <Link to={`/doctor/${doctor._id}`}>
             <button className="btn-primary">View Details</button>
           </Link>
-          <Link to={`/edit-doctor/${doctor._id}`}>
-            <button className="btn-secondary">Edit</button>
-          </Link>
+          {user?.role === "admin" && (
+            <Link to={`/edit-doctor/${doctor._id}`}>
+              <button className="btn-secondary">Edit</button>
+            </Link>
+          )}
         </div>
       </div>
     </article>
