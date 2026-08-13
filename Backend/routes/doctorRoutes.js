@@ -9,7 +9,7 @@ const { protect, admin } = require("../middleware/authMiddleware");
 // router.post("/", addDoctor);
 router.get("/", getDoctors);
 router.get("/:id", getDoctorById );
-router.put("/:id", upload.single("image"), updateDoctor);
+router.put("/:id", protect, admin, upload.single("image"), updateDoctor);
 router.delete("/:id", protect, admin, deleteDoctor);
 router.post("/", protect, admin, upload.single("image"), addDoctor);
 // router.get("/", getDoctors);
