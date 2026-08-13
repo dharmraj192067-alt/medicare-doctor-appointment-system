@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import "./DoctorCard.css";
 
+import api from "../services/api";
+
 function DoctorCard({ doctor }) {
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const imageUrl = doctor.image
-    ? `http://127.0.0.1:3000/uploads/${encodeURIComponent(doctor.image)}`
+    ? `${api.defaults.baseURL.replace("/api", "")}/uploads/${encodeURIComponent(doctor.image)}`
     : "https://placehold.co/120x120?text=Doctor";
 
   return (

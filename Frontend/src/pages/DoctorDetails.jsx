@@ -5,6 +5,7 @@ import api from "../services/api";
 function DoctorDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const imageBaseUrl = api.defaults.baseURL.replace("/api", "");
 
   const [doctor, setDoctor] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -77,7 +78,7 @@ function DoctorDetails() {
           <img
             src={
               doctor.image
-                ? `http://127.0.0.1:3000/uploads/${encodeURIComponent(doctor.image)}`
+                ? `${imageBaseUrl}/uploads/${encodeURIComponent(doctor.image)}`
                 : "https://placehold.co/150x150?text=Doctor"
             }
             alt={doctor.name}
